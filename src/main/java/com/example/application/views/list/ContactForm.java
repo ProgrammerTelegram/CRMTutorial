@@ -28,6 +28,7 @@ public class ContactForm extends FormLayout {
     Button save = new Button("Save");
     Button delete = new Button("Delete");
     Button close = new Button("Cancel");
+    private Contact contact;
 
     public ContactForm(List<Company> companies, List<Status> statuses) {
         addClassName("contact-form");
@@ -43,6 +44,10 @@ public class ContactForm extends FormLayout {
                 createButtonsLayout());
     }
 
+    public void setContact(Contact contact){
+        this.contact = contact;
+        binder.readBean(contact);
+    }
     private HorizontalLayout createButtonsLayout() {
 
         return new HorizontalLayout();
