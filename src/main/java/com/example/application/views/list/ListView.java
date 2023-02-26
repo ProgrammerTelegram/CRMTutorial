@@ -1,15 +1,11 @@
 package com.example.application.views.list;
 
 
-import com.example.application.data.entity.Company;
 import com.example.application.data.entity.Contact;
-import com.example.application.data.entity.Status;
 import com.example.application.data.service.CrmService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
