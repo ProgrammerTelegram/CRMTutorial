@@ -49,7 +49,8 @@ public class ContactForm extends FormLayout {
         binder.readBean(contact);
     }
     private HorizontalLayout createButtonsLayout() {
-
         return new HorizontalLayout();
     }
+
+    //Events
 }
