@@ -24,7 +24,7 @@ import java.util.Collections;
 
 
 @PageTitle("Contact | Vaadin CRM")
-@Route(value = "")
+@Route(value = "", layout = MainLayout.class)
 public class ListView extends VerticalLayout {
 
     Grid<Contact> grid = new Grid<>(Contact.class);
