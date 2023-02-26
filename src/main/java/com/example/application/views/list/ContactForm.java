@@ -55,7 +55,9 @@ public class ContactForm extends FormLayout {
         binder.readBean(contact);
     }
     private HorizontalLayout createButtonsLayout() {
-
+        save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         save.addClickListener(event -> validationSave());
         delete.addClickListener(event -> fireEvent(new DeleteEvent(this, contact)));
         cancel.addClickListener(event -> fireEvent(new CloseEvent(this)));

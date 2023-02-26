@@ -38,7 +38,14 @@ private CrmService service;
         configureForm();
         add(getToolbar(), getContent());
         updateList();
+        closeEditor();
 
+    }
+
+    private void closeEditor() {
+        form.setContact(null);
+        form.setVisible(false);
+        removeClassName("editing");
     }
 
     private void updateList() {
@@ -76,5 +83,17 @@ private CrmService service;
         grid.addColumn(contact -> contact.getStatus().getName()).setHeader("Status");
         grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+        grid.asSingleSelect().addValueChangeListener(e -> editContact(e.getValue()));
+    }
+
+    private void editContact(Contact contact) {
+        if(contact == null){
+            closeEditor();
+        } else {
+
+            form.setContact(contact);
+            form.setVisible(true);
+            addClassName("editing");
+        }
     }
 }
