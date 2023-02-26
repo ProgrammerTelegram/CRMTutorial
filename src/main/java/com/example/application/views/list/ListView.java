@@ -13,6 +13,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import javax.annotation.security.PermitAll;
 import java.awt.*;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import java.util.Collections;
 
 
 @PageTitle("Contact | Vaadin CRM")
+@PermitAll
 @Route(value = "", layout = MainLayout.class)
 public class ListView extends VerticalLayout {
 

@@ -1,7 +1,9 @@
 package com.example.application.views.list;
 
+import com.example.application.security.SecurityService;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -10,8 +12,10 @@ import com.vaadin.flow.router.HighlightConditions;
 import com.vaadin.flow.router.RouterLink;
 
 public class MainLayout extends AppLayout {
+    private SecurityService securityservice;
 
-    public MainLayout(){
+    public MainLayout(SecurityService securityservice){
+        this.securityservice = securityservice;
         createHeader();
         createDrawer();
     }
@@ -19,7 +23,8 @@ public class MainLayout extends AppLayout {
     private void createHeader() {
         H1 logo = new H1("Vaadin CRM");
         logo.addClassNames("text-l", "m-m");
-        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
+        Button logout = new Button("Log out", e-> securityservice.logout());
+        HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo, logout);
 
         header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
         header.expand(logo);
