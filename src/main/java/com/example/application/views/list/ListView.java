@@ -6,6 +6,7 @@ import com.example.application.data.entity.Contact;
 import com.example.application.data.entity.Status;
 import com.example.application.data.service.CrmService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
@@ -55,7 +56,23 @@ private CrmService service;
     private void configureForm(){
         form = new ContactForm(service.findAllCompanies(),service.findAllStatuses());
         form.setWidth("25em");
+        form.addListener(ContactForm.SaveEvent.class, this::saveContact);
+        form.addListener(ContactForm.DeleteEvent.class, this::deleteContact);
+        form.addListener(ContactForm.CloseEvent.class, e-> closeEditor());
     }
+
+    private void deleteContact(ContactForm.DeleteEvent event) {
+        service.deleteContact(event.getContact());
+        updateList();
+        closeEditor();
+    }
+
+    private void saveContact(ContactForm.SaveEvent event){
+        service.saveContact(event.getContact());
+        updateList();
+        closeEditor();
+    }
+
     private Component getContent(){
        HorizontalLayout content = new HorizontalLayout(grid, form);
        content.setFlexGrow(2, grid);
@@ -71,9 +88,16 @@ private CrmService service;
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
         Button addContactButton = new Button("Add contact");
+        addContactButton.addClickListener(e -> addContact());
         HorizontalLayout toolbar = new HorizontalLayout(filterText, addContactButton);
         toolbar.addClassName("toolbar");
         return toolbar;
+    }
+
+    private void addContact() {
+        grid.asSingleSelect().clear();
+        editContact(new Contact());
+        editContact(new Contact());
     }
 
     private void configureGrid() {
